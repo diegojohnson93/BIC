@@ -120,7 +120,7 @@ requestAnimationFrame(step);
 io.observe(el);
 })();
 
-// Formularios de contacto: campos obligatorios y aviso de demostración
+// Formularios de contacto: campos obligatorios y envío a enviar.php
 (function () {
 var forms = document.querySelectorAll('form[aria-label="Formulario de contacto"]');
 for (var i = 0; i < forms.length; i++) {
@@ -132,11 +132,29 @@ if (el.validity && el.validity.valueMissing) { el.setCustomValidity('Este campo 
 else if (el.validity && el.validity.typeMismatch) { el.setCustomValidity('Ingrese un correo válido.'); }
 }, true);
 f.addEventListener('input', function (ev) { if (ev.target.setCustomValidity) { ev.target.setCustomValidity(''); } });
+var ts = f.querySelector('input[name="_t"]');
+if (ts) { ts.value = String(Date.now()); }
 f.addEventListener('submit', function (ev) {
+if (!window.fetch || !window.FormData) { return; }
 ev.preventDefault();
-var m = f.querySelector('.form-msg');
-if (m) { m.textContent = 'Gracias. Esta es una demostración: el envío se conectará en el sitio final.'; }
+var m = f.querySelector('.form-msg'), bt = f.querySelector('button[type="submit"]');
+var lbl = bt ? bt.querySelector('span') : null, txt = lbl ? lbl.textContent : '';
+if (bt) { bt.disabled = true; bt.style.opacity = '0.6'; }
+if (lbl) { lbl.textContent = 'Enviando…'; }
+var fin = function (ok, msg) {
+if (m) { m.textContent = msg; }
+if (bt) { bt.disabled = false; bt.style.opacity = ''; }
+if (lbl) { lbl.textContent = txt; }
+if (ok) { f.reset(); f.classList.remove('tried'); if (ts) { ts.value = String(Date.now()); } }
+};
+fetch(f.getAttribute('action') || 'enviar.php', { method: 'POST', body: new FormData(f), headers: { 'Accept': 'application/json' } })
+.then(function (r) { return r.json().then(function (d) { return { ok: r.ok && d.ok, msg: d.mensaje }; }); })
+.then(function (res) { fin(res.ok, res.msg || (res.ok ? 'Gracias. Recibimos su consulta.' : 'No pudimos enviar su consulta.')); })
+.catch(function () { fin(false, 'No pudimos enviar su consulta. Escríbanos por WhatsApp o llámenos al +56 9 4070 4986.'); });
 });
+var q = window.location.search;
+if (q.indexOf('enviado=1') > -1) { var m1 = f.querySelector('.form-msg'); if (m1) { m1.textContent = 'Gracias. Recibimos su consulta y le responderemos dentro de 48 horas.'; } }
+if (q.indexOf('enviado=0') > -1) { var m0 = f.querySelector('.form-msg'); if (m0) { m0.textContent = 'No pudimos enviar su consulta. Escríbanos por WhatsApp o llámenos al +56 9 4070 4986.'; } }
 })(forms[i]);
 }
 })();

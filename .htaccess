@@ -1,0 +1,25 @@
+# BIC · configuración para Hostinger (Apache/LiteSpeed)
+
+# Página de inicio
+DirectoryIndex index.html
+
+# No exponer archivos internos del repositorio
+<FilesMatch "^(README\.md|CLAUDE\.md|\.gitignore|\.nojekyll)$">
+  Require all denied
+</FilesMatch>
+RedirectMatch 404 /\.git
+
+# Caché del navegador para fotos, estilos y scripts
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/jpeg "access plus 30 days"
+  ExpiresByType image/png "access plus 30 days"
+  ExpiresByType text/css "access plus 7 days"
+  ExpiresByType application/javascript "access plus 7 days"
+  ExpiresByType text/html "access plus 0 seconds"
+</IfModule>
+
+# Compresión
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css application/javascript image/svg+xml
+</IfModule>
