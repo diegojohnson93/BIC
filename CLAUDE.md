@@ -58,7 +58,7 @@ Si cambia el correo de destino de las consultas, actualiza también `$DESTINO` e
 
 ## Recetas frecuentes
 
-- **Agregar una tesis** (`investigacion.html`, sección `id="tesis"`): copia una fila `<div class="trow rv">…</div>`, ajusta el número (`T-06 /`), el título en `<h3>` y la línea `Autor · Universidad · Año`. Elimina las filas de ejemplo que aún digan `[Título de la tesis]`.
+- **Agregar una tesis** (`investigacion.html`, sección `id="tesis"`): copia una fila `<div class="trow rv">…</div>`, ajusta el número (`T-07 /`), el título en `<h3>` y el nombre del estudiante (la segunda línea, `Escuela de Construcción Civil, UV`, se mantiene). Si entregan el año, puede agregarse a esa segunda línea en todas las filas.
 - **Foto de Franco Asenjo**: hoy hay un recuadro con la "B" del logo (`class="ph-pend"`) en `index.html` (sección directores) y en `equipo.html`. Reemplázalo por la foto con el mismo marcado que usa la foto de Jorge Acevedo en esa misma sección.
 - **Reseña o especialidades de Franco** (`equipo.html`): reemplaza los textos entre corchetes `[ ]`.
 - **Cambiar un servicio**: los 5 servicios aparecen en `index.html` (animación de la torre, un bloque `class="tw-b"` por servicio) y en `servicios.html` (bloques `class="srow"`). Mantén siempre **5 servicios**: la animación de la torre tiene 5 etapas. Si cambia el nombre de un servicio, actualiza también la opción del selector "Servicio" en el formulario de las 6 páginas.
@@ -81,5 +81,4 @@ Si cambia el correo de destino de las consultas, actualiza también `$DESTINO` e
 
 - Correo y LinkedIn de BIC.
 - Foto, reseña y especialidades de Franco Asenjo.
-- Tesis guiadas (título, autor, año).
 - Dominios definitivos de los sitios del grupo.

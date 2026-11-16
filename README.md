@@ -57,4 +57,4 @@ Mientras no esté en Hostinger, el sitio se puede ver en GitHub Pages (*Settings
 
 ## Pendiente de contenido
 
-Correo y LinkedIn de BIC; foto, reseña y especialidades de Franco Asenjo; tesis guiadas; dominios definitivos de los sitios del grupo.
+Correo y LinkedIn de BIC; foto, reseña y especialidades de Franco Asenjo; dominios definitivos de los sitios del grupo.
